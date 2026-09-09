@@ -48,16 +48,28 @@
 
 html {
   -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+section[id],
+footer.site-footer {
+  scroll-margin-top: 84px;
 }
 
 body {
   margin: 0;
   background: var(--bg);
   color: var(--ink);
-  font-family: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-family:
+    "IBM Plex Sans",
+    system-ui,
+    -apple-system,
+    "Segoe UI",
+    sans-serif;
   font-size: 16px;
   line-height: 1.55;
-  background-image: linear-gradient(var(--grid) 1px, transparent 1px),
+  background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px),
     linear-gradient(90deg, var(--grid) 1px, transparent 1px);
   background-size: 32px 32px;
 }
@@ -168,7 +180,21 @@ header.site-header {
 }
 nav.links {
   display: flex;
-  gap: 26px;
+  flex-wrap: nowrap;
+  flex: 1 1 0%;
+  min-width: 0;
+  gap: 10px 26px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  mask-image: linear-gradient(
+    to right,
+    #000 calc(100% - 20px),
+    transparent 100%
+  );
+}
+nav.links::-webkit-scrollbar {
+  display: none;
 }
 nav.links a {
   font-family: "IBM Plex Mono", monospace;
@@ -220,7 +246,9 @@ nav.links a:focus-visible {
   color: var(--ink-muted);
   padding: 7px 10px;
   line-height: 1;
-  transition: color 0.15s ease, border-color 0.15s ease;
+  transition:
+    color 0.15s ease,
+    border-color 0.15s ease;
 }
 .theme-btn:hover {
   color: var(--accent);
@@ -266,14 +294,43 @@ h1.name {
   font-weight: 600;
 }
 
+.hero-actions {
+  margin-top: 26px;
+}
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--accent-ink);
+  background: var(--accent);
+  border-radius: 2px;
+  padding: 12px 18px;
+  text-decoration: none;
+  transition: opacity 0.15s ease;
+}
+.hero-cta:hover {
+  opacity: 0.9;
+}
+.hero-cta:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
 .titleblock {
   margin-top: 40px;
   border: 1px solid var(--line);
   border-radius: 2px;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   background: var(--surface);
   box-shadow: var(--shadow);
+}
+.titleblock.case-titleblock {
+  grid-template-columns: repeat(4, 1fr);
 }
 .titleblock .cell {
   padding: 14px 18px;
@@ -323,7 +380,11 @@ section {
 .sheet-head .fill {
   flex: 1;
   height: 1px;
-  background: repeating-linear-gradient(90deg, var(--line-strong) 0 4px, transparent 4px 9px);
+  background: repeating-linear-gradient(
+    90deg,
+    var(--line-strong) 0 4px,
+    transparent 4px 9px
+  );
   align-self: center;
   opacity: 0.7;
   min-width: 40px;
@@ -478,9 +539,10 @@ table.rev td.rev-desc p {
 }
 .card .row1 {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  gap: 10px;
+  gap: 6px 10px;
 }
 .card h3 {
   font-family: "IBM Plex Mono", monospace;
@@ -619,9 +681,10 @@ table.rev td.rev-desc p {
 }
 .credlist li {
   display: flex;
+  flex-wrap: wrap;
   align-items: baseline;
   justify-content: space-between;
-  gap: 14px;
+  gap: 4px 14px;
   font-size: 13.5px;
 }
 .credlist li span:first-child {
@@ -629,9 +692,10 @@ table.rev td.rev-desc p {
 }
 .credcol .credrow {
   display: flex;
+  flex-wrap: wrap;
   align-items: baseline;
   justify-content: space-between;
-  gap: 14px;
+  gap: 4px 14px;
   font-size: 14px;
   padding: 5px 0;
 }
@@ -805,6 +869,124 @@ footer.site-footer {
 .case-body p strong {
   color: var(--ink);
 }
+
+/* case study: detail gallery (main stage + thumbnail rail) */
+.detail-gallery {
+  margin-top: 24px;
+}
+.detail-viewer {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 32px;
+  align-items: start;
+}
+.detail-media-col {
+  max-width: 520px;
+}
+.detail-stage {
+  margin: 0;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  overflow: hidden;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+.detail-stage img {
+  display: block;
+  width: 100%;
+  height: auto;
+  /* aspect-ratio is set inline per image (DetailGallery.tsx) since gallery
+     screenshots vary between portrait and landscape — a single fixed ratio
+     here (previously 1000/515, the case-study hero's ratio) squashed every
+     portrait screenshot into a wide box, leaving large dead white margins. */
+  object-fit: contain;
+}
+.detail-thumbs {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+.detail-thumb {
+  position: relative;
+  display: block;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  overflow: hidden;
+  background: var(--surface);
+  cursor: pointer;
+  line-height: 0;
+  transition: border-color 0.15s ease;
+  width: calc(25% - 6px);
+  flex: 0 0 calc(25% - 6px);
+}
+.detail-thumb img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 140 / 80;
+  object-fit: contain;
+  opacity: 0.55;
+  transition: opacity 0.15s ease;
+}
+.detail-thumb:hover img {
+  opacity: 0.85;
+}
+.detail-thumb.is-active {
+  border-color: var(--accent);
+}
+.detail-thumb.is-active img {
+  opacity: 1;
+}
+.detail-thumb-num {
+  position: absolute;
+  left: 6px;
+  bottom: 6px;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.55);
+  border-radius: 2px;
+  padding: 1px 5px;
+}
+.detail-info {
+  padding-top: 4px;
+}
+.detail-kicker {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.detail-num {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--accent);
+  border: 1px solid var(--line-strong);
+  border-radius: 2px;
+  padding: 2px 6px;
+  letter-spacing: 0.06em;
+  flex-shrink: 0;
+}
+.detail-info h3 {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+.detail-info p {
+  max-width: 66ch;
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: var(--ink-muted);
+  margin: 0;
+}
 .case-cta {
   display: inline-flex;
   align-items: center;
@@ -821,6 +1003,117 @@ footer.site-footer {
 }
 .case-cta:hover {
   opacity: 0.9;
+}
+
+/* ---- Responsive fixes (mobile/tablet) ---- */
+
+/* titleblock: used on homepage hero + case-study pages; 4 cols is too tight
+   below tablet widths, so step down to 2x2 with matching border logic. */
+@media (max-width: 640px) {
+  .titleblock.case-titleblock {
+    grid-template-columns: 1fr 1fr;
+  }
+  .titleblock.case-titleblock .cell {
+    border-right: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+  .titleblock.case-titleblock .cell:nth-child(2n) {
+    border-right: none;
+  }
+  .titleblock.case-titleblock .cell:nth-last-child(-n + 2) {
+    border-bottom: none;
+  }
+
+  .titleblock:not(.case-titleblock) {
+    grid-template-columns: 1fr;
+  }
+  .titleblock:not(.case-titleblock) .cell {
+    border-right: none;
+    border-bottom: 1px solid var(--line);
+  }
+  .titleblock:not(.case-titleblock) .cell:last-child {
+    border-bottom: none;
+  }
+}
+
+/* nav: tighten spacing further on very small phones so six links wrap cleanly */
+@media (max-width: 480px) {
+  .navbar {
+    padding: 14px 20px;
+    gap: 8px 12px;
+  }
+  nav.links {
+    gap: 8px 16px;
+  }
+  nav.links a {
+    font-size: 11px;
+  }
+  .wrap {
+    padding: 0 20px;
+  }
+}
+
+/* experience table: a fixed-column table has no room on narrow screens, so
+   below 700px each row becomes a stacked block instead of a table row. */
+@media (max-width: 700px) {
+  table.rev,
+  table.rev tbody,
+  table.rev tr,
+  table.rev td {
+    display: block;
+    width: 100%;
+  }
+  table.rev thead {
+    display: none;
+  }
+  table.rev tr {
+    padding: 18px 0;
+    border-bottom: 1px solid var(--line-strong);
+  }
+  table.rev tr:first-child {
+    padding-top: 0;
+  }
+  table.rev tr:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+  table.rev td {
+    padding: 0;
+    border-bottom: none;
+    width: auto;
+  }
+  table.rev td.rev-id,
+  table.rev td.rev-date {
+    display: inline-block;
+    width: auto;
+    margin-bottom: 10px;
+  }
+  table.rev td.rev-id {
+    margin-right: 10px;
+  }
+  table.rev td.rev-desc {
+    margin-top: 2px;
+  }
+}
+
+/* detail gallery: media column stacks above the text column */
+@media (max-width: 760px) {
+  .detail-viewer {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .detail-media-col {
+    max-width: 360px;
+  }
+}
+@media (max-width: 480px) {
+  .detail-media-col {
+    max-width: none;
+  }
+  .detail-thumb {
+    width: calc(33.333% - 6px);
+    flex: 0 0 calc(33.333% - 6px);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

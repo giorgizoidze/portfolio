@@ -15,11 +15,21 @@ export default function HomePage() {
           ZOIDZE
         </h1>
         <p className="role">
-          Full-stack developer building <strong>React / TypeScript</strong> interfaces on
-          top of <strong>Oracle PL/SQL</strong> and Node services — currently shipping loan
-          &amp; collateral systems for a bank, and co-founding an access-control product on
-          the side.
+          Full-stack developer building <strong>React / TypeScript</strong>{" "}
+          interfaces on top of <strong>Oracle PL/SQL</strong> and Node services
+          — currently shipping loan &amp; collateral systems for a bank, and
+          co-founding an access-control product on the side.
         </p>
+
+        <div className="hero-actions">
+          <a
+            href="/resume.pdf"
+            download="Giorgi-Zoidze-Resume.pdf"
+            className="hero-cta"
+          >
+            Download Resume ↓
+          </a>
+        </div>
 
         <div className="titleblock">
           <div className="cell">
@@ -34,10 +44,6 @@ export default function HomePage() {
             <div className="label">Status</div>
             <div className="v accent">Open to opportunities</div>
           </div>
-          <div className="cell">
-            <div className="label">Rev.</div>
-            <div className="v mono">2026.09</div>
-          </div>
         </div>
       </section>
 
@@ -48,8 +54,8 @@ export default function HomePage() {
           <span className="fill" />
         </div>
         <p className="prose" style={{ marginBottom: 24 }}>
-          Read top to bottom, most recent first — each role builds on what the last one
-          shipped.
+          Read top to bottom, most recent first — each role builds on what the
+          last one shipped.
         </p>
 
         <table className="rev">
@@ -62,46 +68,69 @@ export default function HomePage() {
           </thead>
           <tbody>
             <tr>
-              <td className="rev-id">C</td>
+              <td className="rev-id">D</td>
               <td className="rev-date">JAN 2025 — PRESENT</td>
               <td className="rev-desc">
                 <div className="role-line">
-                  Full Stack Developer <span className="org">— Silk Bank, Tbilisi</span>
+                  Full Stack Developer{" "}
+                  <span className="org">— Silk Bank, Tbilisi</span>
                 </div>
                 <p>
-                  Own the Contract/Loan Scheme feature end-to-end, from the Oracle PL/SQL
-                  package layer to the React/TypeScript UI. Lead frontend across the Loans,
-                  Cards and Deposits modules, built the &quot;Main Properties&quot; collateral
-                  module, and contribute PL/SQL logic to the customer data package behind KYC
-                  and account information.
+                  Own the Contract/Loan Scheme feature end-to-end, from the
+                  Oracle PL/SQL package layer to the React/TypeScript UI. Lead
+                  frontend across the Loans, Cards and Deposits modules, built
+                  the &quot;Main Properties&quot; collateral module, and
+                  contribute PL/SQL logic to the customer data package behind
+                  KYC and account information.
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <td className="rev-id">C</td>
+              <td className="rev-date">MAR — DEC 2024</td>
+              <td className="rev-desc">
+                <div className="role-line">
+                  React Developer{" "}
+                  <span className="org">— Nexus, placed at Silk Bank</span>
+                </div>
+                <p>
+                  Built the initial Merchants management module and the UCC
+                  payments/authorization module, delivered the SMS Bank
+                  registration flow, and refactored transaction list pages onto
+                  modern React patterns.
                 </p>
               </td>
             </tr>
             <tr>
               <td className="rev-id">B</td>
-              <td className="rev-date">MAR — DEC 2024</td>
+              <td className="rev-date">OCT 2021 — SEP 2023</td>
               <td className="rev-desc">
                 <div className="role-line">
-                  React Developer <span className="org">— Nexus, placed at Silk Bank</span>
+                  Front-End Developer{" "}
+                  <span className="org">— Quantori, Tbilisi</span>
                 </div>
                 <p>
-                  Built the initial Merchants management module and the UCC
-                  payments/authorization module, delivered the SMS Bank registration flow, and
-                  refactored transaction list pages onto modern React patterns.
+                  Shipped production React/TypeScript features across Redux,
+                  Zustand and Effector; improved performance through memoization
+                  and lazy loading; translated Figma designs into accessible,
+                  tested interfaces.
                 </p>
               </td>
             </tr>
             <tr>
               <td className="rev-id">A</td>
-              <td className="rev-date">OCT 2021 — SEP 2023</td>
+              <td className="rev-date">JAN 2019 — JAN 2020</td>
               <td className="rev-desc">
                 <div className="role-line">
-                  Front-End Developer <span className="org">— Quantori, Tbilisi</span>
+                  Front-End Developer{" "}
+                  <span className="org">— Freelance, Remote</span>
                 </div>
                 <p>
-                  Shipped production React/TypeScript features across Redux, Zustand and
-                  Effector; improved performance through memoization and lazy loading;
-                  translated Figma designs into accessible, tested interfaces.
+                  Built responsive, cross-browser landing pages and UI
+                  features in HTML, CSS, JavaScript and React for freelance
+                  clients, testing and optimizing each project for
+                  production while coordinating with backend developers and
+                  designers on API integration.
                 </p>
               </td>
             </tr>
@@ -136,7 +165,9 @@ export default function HomePage() {
               <div className="credmain">
                 Bachelor of Computer Technologies and Engineering
               </div>
-              <div className="credsub">International Black Sea University, Georgia</div>
+              <div className="credsub">
+                International Black Sea University, Georgia
+              </div>
             </div>
             <div className="creddate mono">2015 — 2019</div>
           </div>
@@ -152,7 +183,9 @@ export default function HomePage() {
                 <span className="creddate mono">2024</span>
               </li>
               <li>
-                <span>Node.js, Express, MongoDB &amp; More: The Complete Bootcamp</span>
+                <span>
+                  Node.js, Express, MongoDB &amp; More: The Complete Bootcamp
+                </span>
                 <span className="creddate mono">2023</span>
               </li>
               <li>

@@ -10,6 +10,14 @@ export type Project = {
   summary: string; // short, for the home page card
   images: { src: string; alt: string; width: number; height: number }[];
   paragraphs: string[]; // full case-study copy
+  gallery?: {
+    title: string;
+    src: string;
+    alt: string;
+    width: number;
+    height: number;
+    description: string;
+  }[]; // optional detail gallery: screen + deeper technical writeup
 };
 
 export const projects: Project[] = [
@@ -37,6 +45,44 @@ export const projects: Project[] = [
       "As a co-founder, I own the frontend end to end. On the marketing site, the pricing section pulls live plan data and drives a monthly/annual toggle with an accessible aria-pressed switch; the FAQ is a hand-built two-column accordion — no library — that animates open and closed with a CSS grid-rows trick and tracks a single open item at a time. Scroll-triggered reveals across the site run on a small IntersectionObserver hook I wrote myself, with a prefers-reduced-motion fallback, rather than an animation library.",
       "The hero's door imagery is hand-authored line-art SVG that steps through locked → authenticating → access-granted states as you scroll. But the clearest expression of \"verified, denied, allowed\" actually lives inside the dashboard: I built a live access-check tool that mints a token and fires a real probe through the gateway, then renders whether it was allowed or refused, the status code, latency, and reason. Elsewhere in the dashboard I've shipped permission-gated UI resolved from a react-query-fetched permission set, mutations that cascade into audit-log invalidation, and forms backed by around thirty Zod schemas — including one with cross-field validation that changes which fields are required depending on the routing policy selected.",
       "Being a co-founder rather than a contractor changes the job: frontend decisions here aren't separate from product ones — what a visitor sees first, how much technical detail belongs on the homepage versus the docs, how the pricing tiers should be framed. That overlap has been the biggest difference from client work.",
+    ],
+    gallery: [
+      {
+        title: "A configurable pipeline, not a fixed gate",
+        src: "/images/Pipelines.png",
+        alt: "API protection pipeline showing five ordered stages — locked Identity and Policy stages, then Rate limiting, Threat protection, and Data protection, each active and reorderable",
+        width: 2700,
+        height: 1800,
+        description:
+          "Every request to a protected API runs through an ordered pipeline instead of one pass/fail check. Identity and Policy are the two default stages — locked in place, always first — verifying who's calling and evaluating access rules before anything else runs. Past that, a tenant can add, reorder by drag handle, or disable purpose-built stages — rate limiting, threat protection, response redaction — tightening or loosening enforcement without touching the two stages underneath that can't be turned off.",
+      },
+      {
+        title: "Auth health, tenant usage, and activity in one view",
+        src: "/images/Overview.png",
+        alt: "Overview dashboard with authentication latency, success rate, and failed login attempts at top, usage metrics below, a calendar heatmap of access decisions, and a recent activity feed",
+        width: 2700,
+        height: 1800,
+        description:
+          "The dashboard's top row is deliberately about trust signals, not vanity metrics — authentication latency, success rate, and failed login attempts, each measured against the last 30 days rather than shown as a bare number. Below it, a GitHub-style heatmap plots access decisions per day so a spike in denials or a quiet stretch is visible at a glance, and the recent-activity feed surfaces exactly the events worth a second look — a new passkey, an agent granted access, a denied request — linking straight into the full audit log.",
+      },
+      {
+        title: "Delegation chains with a budget and a leash",
+        src: "/images/delegations.png",
+        alt: "Agent delegation detail: a Q3 ledger reconciliation delegation two hops deep in a Maya Chen to Ledger Reconciler to Invoice Reviewer chain, showing drift mode, scoped capabilities, expiry, budget, and granted resources",
+        width: 2700,
+        height: 1800,
+        description:
+          "An agent can hand off part of its own access to another agent, but not without limits. This delegation sits two hops deep in a chain that started with a human, with exactly one hop of re-delegation left, and is bound to a specific task with its own expiry and a request budget that ticks down as it's used. Resources are granted individually by permission level — reader, viewer, editor — rather than inherited wholesale from the parent, and drift mode enforces a hard threshold automatically if the agent's real behavior strays from what the delegation describes.",
+      },
+      {
+        title: "Every access decision, with the reasoning attached",
+        src: "/images/audit.png",
+        alt: "Audit log table filtered by person and date range, with an expanded 'Access request denied' row showing the decision, policy, identity, and request details behind it",
+        width: 2700,
+        height: 1800,
+        description:
+          "The audit log doesn't just record that a request was denied — it expands into the actual decision: which policy fired, the identity's method and risk score, and the exact route and country the request came from. That level of detail is what turns thousands of log rows from a compliance checkbox into something a security team can use to actually answer \"why was this blocked,\" filterable by person, event type, and date range, and exportable to CSV for anything that needs to leave the dashboard.",
+      },
     ],
   },
   {

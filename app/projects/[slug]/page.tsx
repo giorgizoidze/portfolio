@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { getProject, projects } from "@/lib/projects";
+import DetailGallery from "@/components/DetailGallery";
 
 export function generateStaticParams() {
   return projects.map((p) => ({ slug: p.slug }));
@@ -42,7 +43,7 @@ export default async function ProjectPage({
         <h1 className="case-title">{project.name}</h1>
       </div>
 
-      <div className="titleblock" style={{ marginTop: 24 }}>
+      <div className="titleblock case-titleblock" style={{ marginTop: 24 }}>
         <div className="cell">
           <div className="label">Role</div>
           <div className="v">{project.role}</div>
@@ -85,6 +86,10 @@ export default async function ProjectPage({
           Visit {project.name} ↗
         </a>
       </div>
+
+      {project.gallery && project.gallery.length > 0 ? (
+        <DetailGallery sheet={project.sheet} items={project.gallery} />
+      ) : null}
     </section>
   );
 }
